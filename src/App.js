@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState} from 'react';
 
 function App() {
+  const [name,setName]=useState(
+    {
+      nombre:'',
+    }
+  );
+
+  const handleInputChange = (event) => {
+    setName({
+        ...name,
+        [event.target.name] : event.target.value
+    })
+  }
+
+  const enviarDatos = (event) => {
+    event.preventDefault()
+    alert("Hola "+name.nombre)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hola Mundo</h1>
+      <form onSubmit={enviarDatos}>
+        <input type="text" placeholder="Nombre" onChange={handleInputChange} name="nombre"></input>
+        <button type="submit">Say Hi!</button>
+      </form>
     </div>
   );
 }
